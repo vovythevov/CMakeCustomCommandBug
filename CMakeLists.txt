@@ -33,11 +33,8 @@ set(moc_headers
   foo.h
   )
 
-qt4_wrap_ui(ui_sources foo.ui)
-
 set(output_header ${CMAKE_CURRENT_BINARY_DIR}/bar.h)
 set_source_files_properties(${output_header} PROPERTIES GENERATED TRUE)
-message("${bar_generator_EXECUTABLE} ${output_header}")
 add_custom_command(OUTPUT ${output_header}
   COMMAND ${bar_generator_EXECUTABLE} ${output_header}
   DEPENDS ${bar_generator_EXECUTABLE}
@@ -46,7 +43,6 @@ add_custom_command(OUTPUT ${output_header}
 qt4_wrap_cpp(moc_sources ${moc_headers})
 
 #add_library(foo
-#  ${ui_sources}
 #  ${sources}
 #  ${moc_sources}
 #  ${output_header}
@@ -54,7 +50,6 @@ qt4_wrap_cpp(moc_sources ${moc_headers})
 
 add_library(foo
   ${sources}
-  ${ui_sources}
   ${output_header}
   ${moc_sources}
   ) # this does not work
